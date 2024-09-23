@@ -25,7 +25,7 @@ export default function GeneralApp() {
   const theme = useTheme();
   const { themeStretch } = useSettings();
 const userData = user.user;
- console.log(user)
+
  
   return (
     <Page title="General: App">
@@ -52,7 +52,8 @@ const userData = user.user;
           <Grid item xs={12} md={4}>
             <Appnumber
               title="Total amount deposited"
-              percent={0.2}
+              percent={0}
+              
               currency= {user.currency}
               total={user.totalDeposit}
               chartColor={theme.palette.chart.blue[0]}
@@ -63,8 +64,8 @@ const userData = user.user;
           <Grid item xs={12} md={4}>
             <AppWidgetSummary
               title="Total Transfers"
-              percent={-0.1}
-              total={678}
+              percent={0}
+              total={user.totalTransfer}
               chartColor={theme.palette.chart.red[0]}
               chartData={[8, 9, 31, 8, 16, 37, 8, 33, 46, 31]}
             />

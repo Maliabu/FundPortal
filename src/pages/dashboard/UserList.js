@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-// @mui
-// import { useTheme } from '@mui/material/styles';
+import axios from 'axios';
 import {
   Card,
   Table,
@@ -14,7 +13,23 @@ import {
   Typography,
   TableContainer,
   TablePagination,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Stepper,
+  Step,
+  StepLabel,
+  TextField,Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  InputAdornment,
 } from '@mui/material';
+import { Country } from '../../components/Country';
+import { addUserUrl } from '../../components/Url';
+// @mui hg
+// import { useTheme } from '@mui/material/styles';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
@@ -70,7 +85,7 @@ export default function UserList() {
     }
     setSelected([]);
   };
-
+const steps = ['Personal Information', 'Contact Information', 'Other Details'];
   /* const handleClick = (name) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
@@ -124,10 +139,247 @@ export default function UserList() {
    window.location.href="/dashboard/user/profile";
    
  }
+   const [open, setOpen] = useState(false);
+  const [activeStep, setActiveStep] = useState(0);
+ const [loading, setLoading] = useState(false); // For button loading state
+  const [formValues, setFormValues] = useState({
+    firstName: '',
+    lastName: '',
+    day: '',
+    month: '',
+    year: '',
+    gender: '',
+    email: '',
+    phone: '',
+    countryCode: '+256', // Default country code
+    selectedCountry: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    setFormValues({
+      ...formValues,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+    setActiveStep(0);
+  };
+    const handleSubmit = async () => {
+    setLoading(true); // Set loading state to true
+    try {
+      const data = {
+        firstName: formValues.firstName,
+        lastName: formValues.lastName,
+        dob: `${formValues.year}-${formValues.month}-${formValues.day}`,
+        gender: formValues.gender,
+        email: formValues.email,
+        selectedCountry: formValues.selectedCountry,
+        password:formValues.password,
+        phone: `${formValues.countryCode}${formValues.phone}`, // Combine country code and phone number
+      };
+
+    const response =  await axios.post(addUserUrl, data); // Make POST request
+      handleClose(); // Close the dialog on success
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    } finally {
+      setLoading(false); // Reset loading state
+    }
+  };
   return (
     <Page title="User: List">
       <Container maxWidth={themeStretch ? false : 'lg'}>
+     {/* Fancy Button */}
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleOpen}
+          sx={{ fontWeight: 'bold', textTransform: 'uppercase', mt: 2 }}
+          startIcon={<Iconify icon="eva:plus-fill" />}
+        >
+          Add Users
+        </Button>
 
+        {/* Modal */}
+        <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
+          <DialogTitle>Add New User</DialogTitle>
+          <DialogContent>
+            <Stepper activeStep={activeStep} sx={{ mt: 2 }}>
+              {steps.map((label) => (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+
+            {/* Step 1: Personal Information */}
+            {activeStep === 0 && (
+              <>
+                <TextField
+                  label="First Name"
+                  name="firstName"
+                  value={formValues.firstName}
+                  onChange={handleChange}
+                  fullWidth
+                  sx={{ mt: 3 }}
+                />
+                <TextField
+                  label="Last Name"
+                  name="lastName"
+                  value={formValues.lastName}
+                  onChange={handleChange}
+                  fullWidth
+                  sx={{ mt: 3 }}
+                />
+<br/>
+                <Typography>
+                Day, Month, Year 
+                </Typography> 
+                <TextField
+                  label="Day"
+                  name="day"
+                  value={formValues.day}
+                  onChange={handleChange}
+                  fullWidth
+                  type="number"
+                  sx={{ mt: 3 }}
+                />
+                <FormControl fullWidth sx={{ mt: 3 }}>
+                  <InputLabel>Month</InputLabel>
+                  <Select
+                    label="Month"
+                    name="month"
+                    value={formValues.month}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value="01">January</MenuItem>
+                    <MenuItem value="02">February</MenuItem>
+                    <MenuItem value="03">March</MenuItem>
+                    <MenuItem value="04">April</MenuItem>
+                    <MenuItem value="05">May</MenuItem>
+                    <MenuItem value="06">June</MenuItem>
+                    <MenuItem value="07">July</MenuItem>
+                    <MenuItem value="08">August</MenuItem>
+                    <MenuItem value="09">September</MenuItem>
+                    <MenuItem value="10">October</MenuItem>
+                    <MenuItem value="11">November</MenuItem>
+                    <MenuItem value="12">December</MenuItem>
+                  </Select>
+                </FormControl>
+
+                <TextField
+                  label="Year"
+                  name="year"
+                  value={formValues.year}
+                  onChange={handleChange}
+                  fullWidth
+                  type="number"
+                  sx={{ mt: 3 }}
+                />
+
+                {/* Gender */}
+                <FormControl fullWidth sx={{ mt: 3 }}>
+                  <InputLabel>Gender</InputLabel>
+                  <Select
+                    label="Gender"
+                    name="gender"
+                    value={formValues.gender}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value="male">Male</MenuItem>
+                    <MenuItem value="female">Female</MenuItem>
+                  </Select>
+                </FormControl>
+              </>
+            )}
+
+            {/* Step 2: Contact Information */}
+            {activeStep === 1 && (
+              <>
+                        <TextField 
+          select
+          value={formValues.selectedCountry}
+          onChange={handleChange}
+          name="selectedCountry" 
+          label="Country" 
+          fullWidth
+        >
+          {Country.map(country => (
+            <MenuItem key={country.countryCode} value={country.country}>{country.country}</MenuItem>
+          ))}
+        </TextField>
+                <TextField
+                  label="Email"
+                  name="email"
+                  value={formValues.email}
+                  onChange={handleChange}
+                  fullWidth
+                  sx={{ mt: 3 }}
+                />
+
+                {/* Phone Number Input with Country Code */}
+                <TextField
+                  label="Phone Number"
+                  name="phone"
+                  value={formValues.phone}
+                  onChange={handleChange}
+                  fullWidth
+                  sx={{ mt: 3 }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        {formValues.countryCode}
+                      </InputAdornment>
+                    ),
+                  }}
+                  placeholder="Enter phone number without country code"
+                />
+              </>
+            )}
+
+            {/* Step 3: Review */}
+            {activeStep === 2 && (
+              <Typography sx={{ mt: 3 }}>
+                <strong>Review the details:</strong>
+                <br />
+                Name: {formValues.firstName} {formValues.lastName}
+                <br />
+                Date of Birth: {formValues.day}-{formValues.month}-{formValues.year}
+                <br />
+                Gender: {formValues.gender}
+                <br />
+                Email: {formValues.email}
+                <br />
+                Phone: {formValues.countryCode} {formValues.phone}
+              </Typography>
+            )}
+          </DialogContent>
+
+          <DialogActions>
+            <Button disabled={activeStep === 0} onClick={handleBack}>
+              Back
+            </Button>
+            {activeStep === steps.length - 1 ? (
+              <Button onClick={handleSubmit} disabled={loading}>
+                {loading ? 'Processing...' : 'Finish'}
+              </Button>
+            ) : (
+              <Button onClick={handleNext}>Next</Button>
+            )}
+          </DialogActions>
+        </Dialog>
         <Card>
           <UserListToolbar
             numSelected={selected.length}

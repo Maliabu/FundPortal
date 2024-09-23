@@ -125,7 +125,7 @@ const initialize = async () => {
         password,
       });
       
-    console.log(response)
+    
       if(response.data.login=== 'success'){
       
       localStorage.setItem('email', email);

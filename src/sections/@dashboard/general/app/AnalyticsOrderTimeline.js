@@ -35,7 +35,7 @@ export default function AnalyticsOrderTimeline() {
         },
       }}
     >
-      <CardHeader title="withdraw requests " />
+      <CardHeader title="withdraw requests" />
       <CardContent>
         <Timeline>
           {resultz.map((item, index) => (
