@@ -2,7 +2,7 @@ import { createContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import axios from '../utils/axios';
 import { isValidToken, setSession } from '../utils/jwt';
-
+import {loginUrl,fundUserUrl, signupUrl } from "../components/Url"
 // ----------------------------------------------------------------------
 
 const initialState = {
@@ -76,7 +76,7 @@ const initialize = async () => {
      
       setSession(accessToken);
   
-      const response = await axios.post('/fund/user.php',{
+      const response = await axios.post(fundUserUrl,{
         email:Email,
       });
       const { user } = response.data;
@@ -120,7 +120,7 @@ const initialize = async () => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post('/fund/fund_login.php', {
+      const response = await axios.post(loginUrl, {
         email,
         password,
       });
@@ -151,7 +151,7 @@ const initialize = async () => {
 
   const register = async (email, password, firstName, lastName) => {
     try {
-      const response = await axios.post('/fund/fund_signup.php', {
+      const response = await axios.post(signupUrl, {
         email,
         password,
         firstName,

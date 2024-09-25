@@ -38,3 +38,4 @@ export const getBankCodeUrl = `https://${server}/get_branch.php`;
 export const portfolioUrl = `https://${server}/portifolio.php`;
 export const checkWithdrawUrl = `https://${server}/check.php`;
 export const addUserUrl = `https://${server}/addUser.php`;
+export const fundUserUrl = `https://${server}/user.php`;
