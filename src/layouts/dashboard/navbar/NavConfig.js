@@ -19,6 +19,7 @@ const ICONS = {
   ecommerce: getIcon('ic_ecommerce'),
   analytics: getIcon('ic_analytics'),
   dashboard: getIcon('menue'),
+  
 
 };
 
@@ -30,8 +31,11 @@ const navConfig = [
     items: [
       { title: 'Overview', path: PATH_DASHBOARD.general.app, icon: ICONS.dashboard },
       { title: 'funds', path: PATH_DASHBOARD.general.ecommerce, icon: ICONS.analytics },
+       { title: 'Withdraw', path: PATH_DASHBOARD.general.withdraw, icon: ICONS.kanban },
+       { title: 'Deposits', path: PATH_DASHBOARD.general.deposit, icon: ICONS.mail },
       { title: 'Product', path: PATH_DASHBOARD.general.products, icon: ICONS.ecommerce },
       { title: 'banking', path: PATH_DASHBOARD.general.banking, icon: ICONS.banking },
+
 
     ],
   },

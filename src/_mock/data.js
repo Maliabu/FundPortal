@@ -19,6 +19,7 @@ const useUserData = () => {
           id: storedId,
           email: userEmail,
         });
+        
         setData(response.data);
       } catch (error) {
         setError(error);

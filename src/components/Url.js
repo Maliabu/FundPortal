@@ -12,6 +12,7 @@ export const bioUrl = `https://${server}/bio.php`;
 export const optionsUrl = `https://${server}/options.php`;
 export const saveUrl = `https://${server}/save_options.php`;
 export const investMoneyUrl = `https://${server}/invest_money.php`;
+export const SingleInvestMoneyUrl = `https://${server}/single_invest_money.php`;
 export const addDepositUrl = `https://${server}/add_deposit.php`;
 export const fundUpdateUrl = `https://${server}/fund_update.php`;
 export const investorUpdateUrl = `https://${server}/investor_update.php`;
@@ -39,3 +40,7 @@ export const portfolioUrl = `https://${server}/portifolio.php`;
 export const checkWithdrawUrl = `https://${server}/check.php`;
 export const addUserUrl = `https://${server}/addUser.php`;
 export const fundUserUrl = `https://${server}/user.php`;
+export const checkUrl = `https://${server}/checkurl.php`;
+export const DepositAPI = `https://server.cyanase.app/api/v1/en/make/deposit/`;
+
+export const getDepositUrl = `https://${server}/get_fund_deposit.php`;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Avatar } from '@mui/material';
 import cssStyles from '../../../../utils/cssStyles';
 import MyAvatar from '../../../../components/MyAvatar';
 import Image from '../../../../components/Image';
@@ -41,6 +41,7 @@ ProfileCover.propTypes = {
 export default function ProfileCover({ myProfile }) {
   const { data: userData} = UserData();
    const [fullName, setFullName] = useState("..");
+      const [pic, setPic] = useState("..");
   const userDataInfo = userData;
 
   const { cover } = myProfile;
@@ -51,23 +52,24 @@ useEffect(() => {
       const via = userDataInfo.userInfo
       const fullName = `${via.first_name || ''} ${via.last_name || ''}`;
       setFullName(fullName);
-     
+     setPic(via.profile_picture)
     }
   }, [userDataInfo]);
   
   return (
     <RootStyle>
       <InfoStyle>
-        <MyAvatar
-          sx={{
+        <Avatar alt="booom" src={`https://server.cyanase.app/media/profile/${pic}`}      
+        sx={{
             mx: 'auto',
             borderWidth: 2,
             borderStyle: 'solid',
             borderColor: 'common.white',
             width: { xs: 80, md: 128 },
             height: { xs: 80, md: 128 },
-          }}
-        />
+          }} />
+
+        
         <Box
           sx={{
             ml: { md: 3 },

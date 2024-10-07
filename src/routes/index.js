@@ -70,6 +70,7 @@ export default function Router() {
         { path: 'banking', element: <GeneralBanking /> },
         { path: 'withdrawlist', element: <WithdrawList/> },
         { path: 'products', element: <Products/> },
+        { path: 'deposit', element: <Deposit/> },
         {
           path: 'e-commerce',
           children: [
@@ -154,6 +155,7 @@ const Products = Loadable(lazy(() => import('../pages/dashboard/Product')));
 const GeneralAnalytics = Loadable(lazy(() => import('../pages/dashboard/GeneralAnalytics')));
 const GeneralBanking = Loadable(lazy(() => import('../pages/dashboard/GeneralBanking')));
 const WithdrawList = Loadable(lazy(() => import('../pages/dashboard/WithdrawList')));
+const Deposit = Loadable(lazy(() => import('../pages/dashboard/deposit')));
 const EcommerceShop = Loadable(lazy(() => import('../pages/dashboard/EcommerceShop')));
 const EcommerceProductDetails = Loadable(lazy(() => import('../pages/dashboard/EcommerceProductDetails')));
 const EcommerceProductList = Loadable(lazy(() => import('../pages/dashboard/EcommerceProductList')));

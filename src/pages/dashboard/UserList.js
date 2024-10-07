@@ -49,9 +49,17 @@ import { UserListHead, UserListToolbar } from '../../sections/@dashboard/user/li
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', alignRight: false },
-  { id: 'email', label: 'Email', alignRight: false },
   { id: 'Phone', label: 'Phone number', alignRight: false },
+  { id: 'email', label: 'Email', alignRight: false },
 
+  { id: 'in', label: 'Investment class', alignRight: false },
+    { id: 'op', label: 'opening balance', alignRight: false },
+    { id: 'od', label: 'Deposit', alignRight: false },
+     { id: 'int', label: 'Interest', alignRight: false },
+     { id: 'pn', label: 'Performance fees', alignRight: false },
+     { id: 'in', label: 'Managment fees', alignRight: false },
+     { id: 'ip', label: 'Withdraws', alignRight: false },
+     { id: 'in', label: 'Closing balance', alignRight: false },
   { id: '' },
 ];
 
@@ -418,7 +426,7 @@ const steps = ['Personal Information', 'Contact Information', 'Other Details'];
                         >
                        
                           <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
-                            <Avatar alt={row.name} src={row.avatarUrl} sx={{ mr: 2 }} />
+                            <Avatar alt={row.name} src={`https://server.cyanase.app/media/profile/${row.profile_picture}`} sx={{ mr: 2 }}  />
                             <Typography variant="subtitle2" noWrap>
       {row.first_name}    {row.last_name} 
                             </Typography>
@@ -427,7 +435,30 @@ const steps = ['Personal Information', 'Contact Information', 'Other Details'];
                           <TableCell align="left">
                          { row.email}
 </TableCell>
-
+                          <TableCell align="left">
+                         { row.name}
+</TableCell>
+                          <TableCell align="left">
+                         { row.opening_balance}
+</TableCell>
+                          <TableCell align="left">
+                         { row.deposit_amount}
+</TableCell>
+                          <TableCell align="left">
+                         { row.interest}
+</TableCell>
+                          <TableCell align="left">
+                         { row.performance_fee}
+</TableCell>
+                          <TableCell align="left">
+                         { row.management_fee}
+</TableCell>
+                          <TableCell align="left">
+                         { row.withdraw_amount}
+</TableCell>
+                          <TableCell align="left">
+                         { row.closing_balance}
+</TableCell>
                         </TableRow>
                       );
                     })}

@@ -60,12 +60,12 @@ const userData = user.user;
               chartData={[20, 41, 63, 33, 28, 35, 50, 46, 11, 26]}
             />
           </Grid>
-
           <Grid item xs={12} md={4}>
-            <AppWidgetSummary
+            <Appnumber
               title="Total Transfers"
               percent={0}
-              total={user.totalTransfer}
+              currency= {user.currency}
+              total={user.successWithdraw}
               chartColor={theme.palette.chart.red[0]}
               chartData={[8, 9, 31, 8, 16, 37, 8, 33, 46, 31]}
             />

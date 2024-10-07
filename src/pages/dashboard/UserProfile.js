@@ -60,11 +60,7 @@ export default function UserProfile() {
       icon: <Iconify icon={'ic:round-account-box'} width={20} height={20} />,
       component: <Profile myProfile={_userAbout} posts={_userFeeds} />,
     },
-    {
-      value: 'Activity',
-      icon: <Iconify icon={'eva:heart-fill'} width={20} height={20} />,
-      component: <ProfileFollowers />,
-    },
+
     /* {
       value: 'monthly rate',
       icon: <Iconify icon={'eva:people-fill'} width={20} height={20} />,

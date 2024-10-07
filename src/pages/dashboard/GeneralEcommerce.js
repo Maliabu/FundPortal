@@ -37,9 +37,7 @@ export default function GeneralEcommerce() {
             <EcommerceBestSalesman />
           </Grid>
 
-          <Grid item xs={12} md={6} lg={4}>
-            <EcommerceLatestProducts />
-          </Grid>
+          
         </Grid>
       </Container>
     </Page>

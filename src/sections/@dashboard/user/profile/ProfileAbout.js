@@ -64,13 +64,14 @@ export default function ProfileAbout() {
         user_id: storedId, // Assuming `id` is available in `userDataInfo`
         email: userEmail,
       });
-      console.log('Report sent successfully:', response);
+      
       // Handle success, such as showing a success message to the user
     } catch (error) {
       console.error('Error sending report:', error);
       // Handle error, such as showing an error message to the user
     } finally {
       setIsSending(false); // Reset sending status to false
+      alert('Report sent successfully');
     }
   };
 
